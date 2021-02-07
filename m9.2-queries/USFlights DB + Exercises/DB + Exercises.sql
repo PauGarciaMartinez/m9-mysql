@@ -96,7 +96,7 @@ GROUP BY TailNum
 ORDER BY SUM(Distance) DESC 
 LIMIT 10;
 
-/* EXERCISE 7 ----------------------------------NOT FINISHED */
+/* EXERCISE 7 */
 
 SELECT UniqueCarrier, AVG(ArrDelay)
 FROM Flights
