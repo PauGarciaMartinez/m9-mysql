@@ -52,3 +52,54 @@ CREATE TABLE IF NOT EXISTS Flights(
 	FOREIGN KEY (UniqueCarrier)
 		REFERENCES Carriers (CarrierCode)
 );
+
+/* EXERCISE 1 */
+
+SELECT COUNT(flightID) 
+FROM Flights;
+
+/* EXERCISE 2 */
+
+SELECT Origin, AVG(ArrDelay), AVG(DepDelay) 
+FROM Flights 
+GROUP BY Origin;
+
+/* EXERCISE 3 */
+
+SELECT Origin, colYear, colMonth, ArrDelay 
+FROM Flights 
+ORDER BY Origin ASC, colYear ASC;
+
+/* EXERCISE 4 */
+
+SELECT USAirports.City, 
+	   Flights.colYear, 
+       Flights.colMonth, 
+       Flights.ArrDelay 
+FROM Flights
+INNER JOIN USAirports
+ON Flights.Origin = USAirports.IATA
+ORDER BY City ASC, colYear ASC;
+
+/* EXERCISE 5 */ 
+
+SELECT UniqueCarrier, colYear, colMonth, SUM(Cancelled) 
+FROM Flights
+GROUP BY UniqueCarrier, colYear, colMonth
+ORDER BY SUM(Cancelled) DESC;
+
+/* EXERCISE 6 */
+
+SELECT TailNum, SUM(Distance) 
+FROM Flights 
+GROUP BY TailNum 
+ORDER BY SUM(Distance) DESC 
+LIMIT 10;
+
+/* EXERCISE 7 ----------------------------------NOT FINISHED */
+
+SELECT UniqueCarrier, AVG(ArrDelay)
+FROM Flights
+GROUP BY UniqueCarrier
+HAVING AVG(ArrDelay) > 10
+ORDER BY AVG(ArrDelay) DESC;
